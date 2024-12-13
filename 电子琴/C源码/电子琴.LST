@@ -1,0 +1,114 @@
+C51 COMPILER V9.00   电子琴                                                                09/16/2014 19:52:26 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 电子琴
+OBJECT MODULE PLACED IN 电子琴.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 电子琴.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          #include <reg51.h>
+   3          #include <intrins.h>
+   4          #define uchar unsigned char
+   5          #define uint unsigned int
+   6          
+   7          sbit BEEP = P3^0;
+   8          uchar KeyNO = -1; //按键号，-1表示无按键
+   9          
+  10          //0~9，A~F的数码管段码
+  11          uchar code DSY_CODE[]=
+  12          {
+  13                  0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e
+  14          };
+  15          //矩阵键盘按键特征码 16个按键
+  16          uchar code KeyCodeTable[]=
+  17          {
+  18                  0x11,0x12,0x14,0x18,0x21,0x22,0x24,0x28,0x41,0x42,0x44,0x48,0x81,0x82,0x84,0x88
+  19          };
+  20          
+  21          uint code Tone_Delay_Table[]=
+  22          {       64021, 64103, 64260, 64400, 64524, 64580, 64684, 64777,
+  23                  64820, 64898, 64968, 65030, 65058, 65110, 65157, 65178 };
+  24          
+  25          void DelayMS(uint ms)  //延时
+  26          {
+  27   1              uchar t;
+  28   1              while(ms--)
+  29   1              {
+  30   2                      for(t=0;t<120;t++);
+  31   2              }
+  32   1      }
+  33          
+  34          
+  35          uchar Keys_Scan()   //矩阵键盘扫描
+  36          {
+  37   1              uchar sCode,kCode,i,k;
+  38   1              P1 = 0xf0;  //全局扫描
+  39   1              if(P1!=0xf0)  //有键按下
+  40   1              {
+  41   2                      DelayMS(5);  //延时消抖
+  42   2                      if(P1!=0xf0)  //真有键按下
+  43   2                      {
+  44   3                              sCode = 0xfe;  //扫描第0行
+  45   3                              for(k=0;k<4;k++)  //扫描行
+  46   3                              {
+  47   4                                      P1 = sCode;
+  48   4                                      if((P1 & 0xf0)!=0xf0) // 在本行
+  49   4                                      {
+  50   5                                              kCode = ~P1; 
+  51   5                                              for(i=0;i<16;i++) //找键号
+  52   5                                              {
+  53   6                                                      if(kCode == KeyCodeTable[i])
+  54   6                                                      return i; //返回按键号
+  55   6                                              }
+C51 COMPILER V9.00   电子琴                                                                09/16/2014 19:52:26 PAGE 2   
+
+  56   5                                      }
+  57   4                                      else 
+  58   4                                              sCode = _crol_(sCode,1); //扫描下一行
+  59   4                              }
+  60   3                      }
+  61   2              }
+  62   1              return -1;
+  63   1      }
+  64          
+  65          void Play_Tone() interrupt 1
+  66          {
+  67   1              TH0     = Tone_Delay_Table[KeyNO] / 256;
+  68   1              TL0 = Tone_Delay_Table[KeyNO] % 256;
+  69   1              BEEP = ~BEEP;
+  70   1      }
+  71          
+  72          void main()
+  73          {
+  74   1              P0= 0xBF;
+  75   1              TMOD = 0x01;
+  76   1              IE = 0x82;       
+  77   1              while(1)
+  78   1              {
+  79   2                      KeyNO = Keys_Scan(); //扫描键盘
+  80   2                      if(KeyNO!= -1)   //有键按下
+  81   2                      {
+  82   3                              P0 = ~DSY_CODE[KeyNO];
+  83   3                              TR0 =1 ;                        
+  84   3                      }
+  85   2                      else
+  86   2                              TR0 = 0;
+  87   2                      DelayMS(2);
+  88   2              }
+  89   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    201    ----
+   CONSTANT SIZE    =     64    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

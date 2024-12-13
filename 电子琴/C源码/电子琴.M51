@@ -1,0 +1,174 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        09/16/2014  19:52:26  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE 电子琴.obj TO 电子琴
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  电子琴.obj (电子琴)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  电子琴 (电子琴)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?电子琴
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0004H     UNIT         ?C_INITSEG
+                    0007H     0004H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    009AH     004CH     UNIT         ?PR?KEYS_SCAN?电子琴
+            CODE    00E6H     0040H     UNIT         ?CO?电子琴
+            CODE    0126H     003DH     UNIT         ?PR?PLAY_TONE?电子琴
+            CODE    0163H     002AH     UNIT         ?PR?MAIN?电子琴
+            CODE    018DH     0016H     UNIT         ?PR?_DELAYMS?电子琴
+
+
+
+OVERLAY MAP OF MODULE:   电子琴 (电子琴)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?PLAY_TONE?电子琴
+  +--> ?CO?电子琴
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?电子琴
+  +--> ?C_INITSEG
+
+?PR?MAIN?电子琴
+  +--> ?PR?KEYS_SCAN?电子琴
+  +--> ?CO?电子琴
+  +--> ?PR?_DELAYMS?电子琴
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/16/2014  19:52:26  PAGE 2
+
+
+?PR?KEYS_SCAN?电子琴
+  +--> ?PR?_DELAYMS?电子琴
+  +--> ?CO?电子琴
+
+
+
+SYMBOL TABLE OF MODULE:  电子琴 (电子琴)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        电子琴
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:009AH         PUBLIC        Keys_Scan
+  D:00A8H         PUBLIC        IE
+  C:0126H         PUBLIC        Play_Tone
+  C:018DH         PUBLIC        _DelayMS
+  C:00F6H         PUBLIC        KeyCodeTable
+  B:00B0H.0       PUBLIC        BEEP
+  C:0163H         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  C:0106H         PUBLIC        Tone_Delay_Table
+  D:0008H         PUBLIC        KeyNO
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  C:00E6H         PUBLIC        DSY_CODE
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0005H         SYMBOL        t
+  -------         ENDDO         
+  C:018DH         LINE#         25
+  C:018DH         LINE#         26
+  C:018DH         LINE#         28
+  C:0197H         LINE#         29
+  C:0197H         LINE#         30
+  C:01A2H         LINE#         31
+  C:01A2H         LINE#         32
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          KEYS_SCAN
+  -------         DO            
+  D:0007H         SYMBOL        sCode
+  D:0005H         SYMBOL        kCode
+  D:0004H         SYMBOL        i
+  D:0006H         SYMBOL        k
+  -------         ENDDO         
+  C:009AH         LINE#         35
+  C:009AH         LINE#         36
+  C:009AH         LINE#         38
+  C:009DH         LINE#         39
+  C:00A3H         LINE#         40
+  C:00A3H         LINE#         41
+  C:00AAH         LINE#         42
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/16/2014  19:52:26  PAGE 3
+
+
+  C:00B0H         LINE#         43
+  C:00B0H         LINE#         44
+  C:00B2H         LINE#         45
+  C:00B4H         LINE#         46
+  C:00B4H         LINE#         47
+  C:00B6H         LINE#         48
+  C:00BEH         LINE#         49
+  C:00BEH         LINE#         50
+  C:00C2H         LINE#         51
+  C:00C4H         LINE#         52
+  C:00C4H         LINE#         53
+  C:00CCH         LINE#         54
+  C:00CFH         LINE#         55
+  C:00D5H         LINE#         56
+  C:00D5H         LINE#         58
+  C:00DFH         LINE#         59
+  C:00E3H         LINE#         60
+  C:00E3H         LINE#         61
+  C:00E3H         LINE#         62
+  C:00E5H         LINE#         63
+  -------         ENDPROC       KEYS_SCAN
+  -------         PROC          PLAY_TONE
+  C:0126H         LINE#         65
+  C:0137H         LINE#         67
+  C:014EH         LINE#         68
+  C:0152H         LINE#         69
+  C:0154H         LINE#         70
+  -------         ENDPROC       PLAY_TONE
+  -------         PROC          MAIN
+  C:0163H         LINE#         72
+  C:0163H         LINE#         73
+  C:0163H         LINE#         74
+  C:0166H         LINE#         75
+  C:0169H         LINE#         76
+  C:016CH         LINE#         77
+  C:016CH         LINE#         78
+  C:016CH         LINE#         79
+  C:0171H         LINE#         80
+  C:0176H         LINE#         81
+  C:0176H         LINE#         82
+  C:017EH         LINE#         83
+  C:0180H         LINE#         84
+  C:0182H         LINE#         86
+  C:0184H         LINE#         87
+  C:018BH         LINE#         88
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        电子琴
+
+Program Size: data=10.0 xdata=0 code=415
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
