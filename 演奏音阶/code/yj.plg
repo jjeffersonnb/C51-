@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\梅孝安\教学\2014年下学期\单片机-创新训练\单片机C语言程序设计实训100例——基于8051 Proteus仿真\案例仿真\第 01 篇 基础部分\39 演奏一段音阶\code\yj.uvproj
+Project File Date:  <unknown>
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling yj.c...
+linking...
+Program Size: data=10.0 xdata=0 code=277
+creating hex file from "yj"...
+"yj" - 0 Error(s), 0 Warning(s).
