@@ -1,0 +1,449 @@
+C51 COMPILER V9.00   MAIN                                                                  02/05/2021 14:34:32 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN MAIN.OBJ
+COMPILER INVOKED BY: C:\APPS\Keil\C51\BIN\C51.EXE MAIN.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1                           /***************  光控数字温度时钟 优化版2019.12.26  ******************/
+   2          #include <reg52.h>
+   3          #include <intrins.h>
+   4          #include <string.h>
+   5          #define uint unsigned int
+   6          #define uchar unsigned char
+   7          
+   8          sbit dot = P0^7;
+   9          sbit DS1 = P2^0;
+  10          sbit DS2 = P2^1;
+  11          sbit DS3 = P2^2;
+  12          sbit DS4 = P2^3;
+  13          sbit K1 = P2^4;
+  14          sbit K2 = P2^5;
+  15          sbit BUZZER = P2^6;
+  16          
+  17          uchar code LEDData1 [ ] = {  0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0xff }; //正0-9LED数值
+  18          uchar code LEDData2 [ ] = {  0xc0,0xcf,0xA4,0x86,0x8B,0x92,0x90,0xc7,0x80,0x82,0xff }; //反0-9LED数值
+  19          
+  20          uchar DateTime[7]; //日期与时间 [1]分钟，[2]小时
+  21          uchar Time[4];  //当前时间 0 1小时 2 3 分钟
+  22          uchar second;
+  23          uchar k1push;
+  24          uint T,L;  //温度，光照
+  25          uchar alart,aH,aM; //闹钟指示 小时、分钟
+  26          char mode=0;//显示模式：0正常 1小时调节，2分钟调节，3闹钟小时，4闹钟分钟
+  27          
+  28          void GetTime(uchar *DateTime );
+  29          void SET_DS1302(uchar *DateTime);
+  30          uint readAD(uchar port);
+  31          
+  32          void Delayms(uint ms)
+  33          {
+  34   1              uchar i;
+  35   1              while(ms--)
+  36   1              {
+  37   2                      for(i=0;i<120;i++);
+  38   2              }
+  39   1      } 
+  40          
+  41          void Key_Scan()
+  42          {
+  43   1              if(K2==0) //选择调节对象
+  44   1              {
+  45   2                      while(K2==0);
+  46   2                      TR0=0;
+  47   2                      mode++;
+  48   2                      if(mode==3 && k1push)SET_DS1302(DateTime);
+  49   2                      if(mode==5){mode=0;k1push=0;TR0=1;}
+  50   2              } 
+  51   1              if(K1==0)
+  52   1              {
+  53   2                      while(K1==0);
+  54   2                      k1push=1;
+  55   2                      switch(mode)
+C51 COMPILER V9.00   MAIN                                                                  02/05/2021 14:34:32 PAGE 2   
+
+  56   2                      {
+  57   3                              case 4: //调节闹钟分钟
+  58   3                                      aM=(++DateTime[1])%60;
+  59   3                                      aH=DateTime[2];
+  60   3                                      alart=1;
+  61   3                                      break;
+  62   3                              case 3: //调节闹钟小时
+  63   3                                      aH=(++DateTime[2])%24;
+  64   3                                      aM=DateTime[1];
+  65   3                                      alart=1;
+  66   3                                      break;
+  67   3                              case 2: //调节 分钟
+  68   3                                      DateTime[1]=(++DateTime[1])%60;
+  69   3                                      break;
+  70   3                              case 1: //调节 小时
+  71   3                                      DateTime[2]=(++DateTime[2])%24;
+  72   3                                      break;
+  73   3                      }
+  74   2              } 
+  75   1      }
+  76          
+  77          
+  78          
+  79          void V_Scan() //温度扫描
+  80          {
+  81   1              T=readAD(0x00)*5*0.9814;
+  82   1              Delayms(5);
+  83   1              L=readAD(0x10)*5*0.9814;
+  84   1              
+  85   1      /*      if(L>3180)P3=180; //弱光 10流明以下
+  86   1              else if(L>2030)P3=210; //中光 10～30流明
+  87   1              else P3=240;  //强光 30流明以上
+  88   1      */
+  89   1              P3=(5000-L)/20;
+  90   1              Delayms(5);
+  91   1      }
+  92          
+  93          void TIME_Display0()//正常显示时间
+  94          {
+  95   1              Time[0]=DateTime[2]/10; //小时十位
+  96   1              Time[1]=DateTime[2]%10; //小时个位
+  97   1              Time[2]=DateTime[1]/10; //分钟十位
+  98   1              Time[3]=DateTime[1]%10; //分钟个位 
+  99   1      
+ 100   1              DS1=0;DS2=1;DS3=1;DS4=1;
+ 101   1              P0=LEDData1[Time[0]];
+ 102   1              dot=1;  Delayms(5);
+ 103   1               
+ 104   1              DS1=1;DS2=0;DS3=1;DS4=1;
+ 105   1              P0=LEDData1[Time[1]]-0x80;
+ 106   1              Delayms(5);
+ 107   1      
+ 108   1              DS1=1;DS2=1;DS3=0;DS4=1;
+ 109   1              P0=LEDData2[Time[2]]-0x80;//第3个数码管，采用反码
+ 110   1              Delayms(5);
+ 111   1      
+ 112   1              DS1=1;DS2=1;DS3=1;DS4=0;
+ 113   1              P0=LEDData1[Time[3]];
+ 114   1              if(alart){TR1=0;dot=0;} 
+ 115   1              Delayms(5);TR1=1;
+ 116   1      }
+ 117          
+C51 COMPILER V9.00   MAIN                                                                  02/05/2021 14:34:32 PAGE 3   
+
+ 118          void TIME_Display1()//小时调节模式，小时2位闪烁
+ 119          {
+ 120   1              uchar i;        
+ 121   1              Time[0]=DateTime[2]/10; //小时十位
+ 122   1              Time[1]=DateTime[2]%10; //小时个位
+ 123   1              Time[2]=DateTime[1]/10; //分钟十位
+ 124   1              Time[3]=DateTime[1]%10; //分钟个位 
+ 125   1              for(i=0;i<12;i++)
+ 126   1              {       
+ 127   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 128   2                      P0=LEDData1[Time[0]];
+ 129   2                      Delayms(5);
+ 130   2                       
+ 131   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 132   2                      P0=LEDData1[Time[1]]-0x80;
+ 133   2                      Delayms(5);
+ 134   2      
+ 135   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 136   2                      P0=LEDData2[Time[2]]-0x80;//第3个数码管，采用反码
+ 137   2                      Delayms(5);
+ 138   2      
+ 139   2                      DS1=1;DS2=1;DS3=1;DS4=0;
+ 140   2                      P0=LEDData1[Time[3]];
+ 141   2                      Delayms(5);
+ 142   2              }
+ 143   1              for(i=0;i<6;i++)
+ 144   1              {       
+ 145   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 146   2                      P0=0xff;
+ 147   2                      Delayms(5);     //灭
+ 148   2                       
+ 149   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 150   2                      P0=0xff-0x80;
+ 151   2                      Delayms(5); //灭
+ 152   2      
+ 153   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 154   2                      P0=LEDData2[Time[2]]-0x80;//第3个数码管，采用反码
+ 155   2                      Delayms(5);
+ 156   2      
+ 157   2                      DS1=1;DS2=1;DS3=1;DS4=0;
+ 158   2                      P0=LEDData1[Time[3]];
+ 159   2                      Delayms(5);
+ 160   2              } 
+ 161   1      }
+ 162          
+ 163          void TIME_Display2()//分钟调节模式，分钟2位闪烁
+ 164          {
+ 165   1              uchar i;
+ 166   1              Time[0]=DateTime[2]/10; //小时十位
+ 167   1              Time[1]=DateTime[2]%10; //小时个位
+ 168   1              Time[2]=DateTime[1]/10; //分钟十位
+ 169   1              Time[3]=DateTime[1]%10; //分钟个位 
+ 170   1              for(i=0;i<12;i++)
+ 171   1              {       
+ 172   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 173   2                      P0=LEDData1[Time[0]];
+ 174   2                      Delayms(5);
+ 175   2                       
+ 176   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 177   2                      P0=LEDData1[Time[1]]-0x80;
+ 178   2                      Delayms(5);
+ 179   2      
+C51 COMPILER V9.00   MAIN                                                                  02/05/2021 14:34:32 PAGE 4   
+
+ 180   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 181   2                      P0=LEDData2[Time[2]]-0x80;//第3个数码管，采用反码
+ 182   2                      Delayms(5);
+ 183   2      
+ 184   2                      DS1=1;DS2=1;DS3=1;DS4=0;
+ 185   2                      P0=LEDData1[Time[3]];
+ 186   2                      Delayms(5);
+ 187   2              }
+ 188   1              for(i=0;i<6;i++)
+ 189   1              {       
+ 190   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 191   2                      P0=LEDData1[Time[0]];
+ 192   2                      Delayms(5);
+ 193   2                       
+ 194   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 195   2                      P0=LEDData1[Time[1]]-0x80;
+ 196   2                      Delayms(5);
+ 197   2      
+ 198   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 199   2                      P0=0xff-0x80;//灭
+ 200   2                      Delayms(5);
+ 201   2      
+ 202   2                      DS1=1;DS2=1;DS3=1;DS4=0;
+ 203   2                      P0=0xff; //     灭
+ 204   2                      Delayms(5);
+ 205   2              } 
+ 206   1      }
+ 207          
+ 208          void TIME_Display3()//闹钟小时调节模式，小时两位闪烁，最后数码管小点亮
+ 209          {
+ 210   1              uchar i;
+ 211   1              Time[0]=DateTime[2]/10; //小时十位
+ 212   1              Time[1]=DateTime[2]%10; //小时个位
+ 213   1              Time[2]=DateTime[1]/10; //分钟十位
+ 214   1              Time[3]=DateTime[1]%10; //分钟个位 
+ 215   1              for(i=0;i<12;i++)
+ 216   1              {       
+ 217   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 218   2                      P0=LEDData1[Time[0]];
+ 219   2                      Delayms(5);
+ 220   2                       
+ 221   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 222   2                      P0=LEDData1[Time[1]]-0x80;
+ 223   2                      Delayms(5);
+ 224   2      
+ 225   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 226   2                      P0=LEDData2[Time[2]]-0x80;//第3个数码管，采用反码
+ 227   2                      Delayms(5);
+ 228   2      
+ 229   2                      DS1=1;DS2=1;DS3=1;DS4=0;TR1=0;
+ 230   2                      P0=LEDData1[Time[3]]-0x80;
+ 231   2                      Delayms(5);TR1=1;
+ 232   2              }
+ 233   1              for(i=0;i<6;i++)
+ 234   1              {       
+ 235   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 236   2                      P0=0xff;
+ 237   2                      Delayms(5);
+ 238   2                       
+ 239   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 240   2                      P0=0xff-0x80;
+ 241   2                      Delayms(5); //灭
+C51 COMPILER V9.00   MAIN                                                                  02/05/2021 14:34:32 PAGE 5   
+
+ 242   2      
+ 243   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 244   2                      P0=LEDData2[Time[2]]-0x80;//第3个数码管，采用反码
+ 245   2                      Delayms(5);
+ 246   2      
+ 247   2                      DS1=1;DS2=1;DS3=1;DS4=0;TR1=0;
+ 248   2                      P0=LEDData1[Time[3]]-0x80;
+ 249   2                      Delayms(5);     TR1=1;
+ 250   2              } 
+ 251   1      }
+ 252          
+ 253          void TIME_Display4()//闹钟分钟调节模式，分钟两位闪烁，最后数码管小点亮
+ 254          {
+ 255   1              uchar i;
+ 256   1              Time[0]=DateTime[2]/10; //小时十位
+ 257   1              Time[1]=DateTime[2]%10; //小时个位
+ 258   1              Time[2]=DateTime[1]/10; //分钟十位
+ 259   1              Time[3]=DateTime[1]%10; //分钟个位 
+ 260   1              for(i=0;i<12;i++)
+ 261   1              {       
+ 262   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 263   2                      P0=LEDData1[Time[0]];
+ 264   2                      Delayms(5);
+ 265   2                       
+ 266   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 267   2                      P0=LEDData1[Time[1]]-0x80;
+ 268   2                      Delayms(5);
+ 269   2      
+ 270   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 271   2                      P0=LEDData2[Time[2]]-0x80;//第3个数码管，采用反码
+ 272   2                      Delayms(5);
+ 273   2      
+ 274   2                      DS1=1;DS2=1;DS3=1;DS4=0;TR1=0;
+ 275   2                      P0=LEDData1[Time[3]]-0x80;
+ 276   2                      Delayms(5);     TR1=1;
+ 277   2              }
+ 278   1              for(i=0;i<6;i++)
+ 279   1              {       
+ 280   2                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 281   2                      P0=LEDData1[Time[0]];
+ 282   2                      Delayms(5);
+ 283   2                       
+ 284   2                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 285   2                      P0=LEDData1[Time[1]]-0x80;
+ 286   2                      Delayms(5);
+ 287   2      
+ 288   2                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 289   2                      P0=0xff-0x80;//第3个数码管，采用反码
+ 290   2                      Delayms(5);
+ 291   2      
+ 292   2                      DS1=1;DS2=1;DS3=1;DS4=0;TR1=0;
+ 293   2                      P0=0xff-0x80; //灭
+ 294   2                      Delayms(5);     TR1=1;
+ 295   2              } 
+ 296   1      }
+ 297          
+ 298          
+ 299          void WD_Display()
+ 300          {
+ 301   1              
+ 302   1              uchar a,b;
+ 303   1              a=T/1000;
+C51 COMPILER V9.00   MAIN                                                                  02/05/2021 14:34:32 PAGE 6   
+
+ 304   1              b=T%1000/100;
+ 305   1              TR1=0; //关闭T1
+ 306   1                      DS1=0;DS2=1;DS3=1;DS4=1;
+ 307   1                      P0=LEDData1[a];
+ 308   1                      dot=1;  Delayms(5);
+ 309   1                       
+ 310   1                      DS1=1;DS2=0;DS3=1;DS4=1;
+ 311   1                      P0=LEDData1[b];
+ 312   1                      Delayms(5);
+ 313   1      
+ 314   1                      DS1=1;DS2=1;DS3=0;DS4=1;
+ 315   1                      P0=0xf0;//第3个数码管，C的反码
+ 316   1                      dot=0;
+ 317   1                      Delayms(5);
+ 318   1      
+ 319   1                      DS1=1;DS2=1;DS3=1;DS4=0;
+ 320   1                      P0=0xff;
+ 321   1                      dot=1;  Delayms(5);
+ 322   1              TR1=1;  
+ 323   1      }
+ 324          
+ 325          
+ 326          void Alart_Scan()
+ 327          {
+ 328   1              if(alart && aM==DateTime[1] && aH==DateTime[2] && mode==0 && second==0)//检查闹钟
+ 329   1              {
+ 330   2                              BUZZER=0;  //启动蜂鸣器
+ 331   2                              Delayms(6000);
+ 332   2                              BUZZER=1;  //停止蜂鸣器
+ 333   2                              alart=0;   //取消闹钟
+ 334   2              }
+ 335   1          if(DateTime[2]>7 && DateTime[2]<23 && DateTime[1]==0 && DateTime[0]==0) //8：00～22：00整点报时
+ 336   1              {
+ 337   2                      BUZZER=0;
+ 338   2                      Delayms(3000);
+ 339   2                      BUZZER=1;
+ 340   2              }
+ 341   1      }
+ 342          
+ 343          void Display()
+ 344          {
+ 345   1              switch(mode)
+ 346   1              {
+ 347   2                      case 4: //调节闹钟分钟
+ 348   2                                      TIME_Display4();
+ 349   2                                      break;
+ 350   2                      case 3: //调节闹钟小时
+ 351   2                                      TIME_Display3();
+ 352   2                                      break;
+ 353   2                      case 2: //调节 分钟
+ 354   2                                      TIME_Display2();
+ 355   2                                      break;
+ 356   2                      case 1: //调节小时模式
+ 357   2                                      TIME_Display1();
+ 358   2                                      break;
+ 359   2                      case 0://正常模式
+ 360   2                                      if((second>5 && second <10)||(second>35 && second <40))
+ 361   2                                              WD_Display(); 
+ 362   2                                      else
+ 363   2                                              TIME_Display0(); 
+ 364   2                                      break;
+ 365   2                      }
+C51 COMPILER V9.00   MAIN                                                                  02/05/2021 14:34:32 PAGE 7   
+
+ 366   1      }
+ 367          
+ 368          
+ 369          void main()
+ 370          {
+ 371   1              mode = 0;
+ 372   1              alart=0;        k1push=0;
+ 373   1              BUZZER=1;       P3=200;
+ 374   1      
+ 375   1              TMOD=0x01; //T1方式0，T0方式1
+ 376   1              EA=1;ET1=1;ET0=1;
+ 377   1              TH0=(65536-50000)/256;
+ 378   1              TL0=(65536-50000)%256; //50ms
+ 379   1              TH1=(8192-100)/32;
+ 380   1              TL1=(8192-100)%32; //0.1ms
+ 381   1              TR0=1;TR1=1;
+ 382   1              while(1)
+ 383   1              {
+ 384   2                      Key_Scan();
+ 385   2                      Alart_Scan();
+ 386   2                      V_Scan();
+ 387   2                      Display();
+ 388   2              }
+ 389   1      }
+ 390          
+ 391          void Timer0_INT() interrupt 1
+ 392          {
+ 393   1              TR0=0;
+ 394   1              TH0=(65536-50000)/256;
+ 395   1              TL0=(65536-50000)%256;
+ 396   1              if(mode==0)
+ 397   1              {
+ 398   2                      GetTime(DateTime);
+ 399   2                      second=DateTime[0];
+ 400   2              }
+ 401   1              TR0=1; 
+ 402   1      }
+ 403          
+ 404          void Timer1_INT() interrupt 3
+ 405          {
+ 406   1              static uint count=0;
+ 407   1              TR1=0;
+ 408   1              TH1=(8192-100)/32;
+ 409   1              TL1=(8192-100)%32; //0.1ms
+ 410   1              if(++count==10000)count=0;
+ 411   1              if((DS2==0||DS3==0) && count<6000 )dot=0;
+ 412   1              else dot=1;
+ 413   1              TR1=1;
+ 414   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1339    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
