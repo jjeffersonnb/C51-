@@ -1,0 +1,18 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\LHM\Desktop\《基于CDIO工程教育理念的单片机原理及应用》（2021版）\程序\第12章\12-1-1 通道固定ADC0809\code\通道固定ADC0809.uvproj
+Project File Date:  02/02/2021
+
+<h2>Output:</h2>
+Build target '目标 1'
+Target has no object modules
+目标未创建
+Build target '目标 1'
+compiling main.c...
+linking...
+Program Size: data=10.0 xdata=0 code=61
+creating hex file from "通道固定ADC0809"...
+"通道固定ADC0809" - 0 Error(s), 0 Warning(s).
