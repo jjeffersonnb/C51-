@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\xiaoa\Desktop\TLC5615\CODE\TLC5615.uvproj
+Project File Date:  03/04/2020
+
+<h2>Output:</h2>
+Build target 'Ä¿±ê 1'
+compiling MAIN.C...
+linking...
+Program Size: data=21.1 xdata=0 code=1788
+creating hex file from "TLC5615"...
+"TLC5615" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,188 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/04/2020  16:32:23  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE MAIN.obj TO TLC5615
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  MAIN.obj (MAIN)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?FPADD)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?FPCMP)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?CASTF)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (SIN)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?FPDIV)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?FCAST)
+  C:\APPS\KEIL\C51\LIB\C51FPS.LIB (?C?FPSERIES)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C?LNEG)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C?LLDCODE)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C?LLDCODE0)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  TLC5615 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?MAIN
+            DATA    0010H     0004H     UNIT         _DATA_GROUP_
+                    0014H     000CH                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0445H     UNIT         ?C?LIB_CODE
+            CODE    0448H     016EH     UNIT         ?PR?SIN?SIN
+            CODE    05B6H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0642H     0071H     UNIT         ?PR?MAIN?MAIN
+            CODE    06B3H     0042H     UNIT         ?PR?_DAC?MAIN
+            CODE    06F5H     0007H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   TLC5615 (MAIN)
+
+
+SEGMENT                           BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH     START    LENGTH
+------------------------------------------------------------------
+?C_C51STARTUP                  -----    -----      -----    -----
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2020  16:32:23  PAGE 2
+
+
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  -----    -----      -----    -----
+  +--> ?PR?SIN?SIN
+  +--> ?PR?_DAC?MAIN
+
+?PR?SIN?SIN                    0020H.0  0000H.1    0010H    0004H
+
+
+
+SYMBOL TABLE OF MODULE:  TLC5615 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  B:00B0H.1       PUBLIC        CS
+  D:00B8H         PUBLIC        IP
+  C:0642H         PUBLIC        main
+  B:00B0H.0       PUBLIC        SCLK
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:06B3H         PUBLIC        _DAC
+  D:0008H         PUBLIC        num
+  B:00B0H.2       PUBLIC        DIN
+  D:00C8H         PUBLIC        T2CON
+  D:000CH         PUBLIC        j
+  D:000EH         PUBLIC        t
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DAC
+  D:0002H         SYMBOL        adata
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:06B3H         LINE#         8
+  C:06B7H         LINE#         9
+  C:06B7H         LINE#         11
+  C:06C4H         LINE#         12
+  C:06C6H         LINE#         13
+  C:06C8H         LINE#         14
+  C:06C8H         LINE#         15
+  C:06CAH         LINE#         16
+  C:06E5H         LINE#         17
+  C:06E7H         LINE#         18
+  C:06F0H         LINE#         19
+  C:06F2H         LINE#         20
+  C:06F4H         LINE#         21
+  -------         ENDPROC       _DAC
+  -------         PROC          MAIN
+  C:0642H         LINE#         22
+  C:0642H         LINE#         23
+  C:0642H         LINE#         24
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2020  16:32:23  PAGE 3
+
+
+  C:0644H         LINE#         25
+  C:0644H         LINE#         26
+  C:0644H         LINE#         27
+  C:064AH         LINE#         28
+  C:0665H         LINE#         29
+  C:067AH         LINE#         30
+  C:0683H         LINE#         31
+  C:069FH         LINE#         32
+  C:06ABH         LINE#         33
+  C:06B1H         LINE#         34
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?FPADD
+  C:000AH         PUBLIC        ?C?FPADD
+  C:0006H         PUBLIC        ?C?FPSUB
+  -------         ENDMOD        ?C?FPADD
+
+  -------         MODULE        ?C?FPMUL
+  C:00FBH         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FPCMP
+  C:0203H         PUBLIC        ?C?FPCMP
+  C:0201H         PUBLIC        ?C?FPCMP3
+  -------         ENDMOD        ?C?FPCMP
+
+  -------         MODULE        ?C?CASTF
+  C:026EH         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        SIN
+  C:0490H         PUBLIC        _COS
+  C:04A6H         PUBLIC        _SIN
+  C:04D8H         PUBLIC        _TAN
+  -------         ENDMOD        SIN
+
+  -------         MODULE        ?C?FPDIV
+  C:02F2H         PUBLIC        ?C?FPDIV
+  -------         ENDMOD        ?C?FPDIV
+
+  -------         MODULE        ?C?FCAST
+  C:0399H         PUBLIC        ?C?FCASTC
+  C:0394H         PUBLIC        ?C?FCASTI
+  C:038FH         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?LNEG
+  C:041AH         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+  -------         MODULE        ?C?LLDCODE
+  C:0428H         PUBLIC        ?C?LLDCODE
+  -------         ENDMOD        ?C?LLDCODE
+
+  -------         MODULE        ?C?LLDCODE0
+  C:0438H         PUBLIC        ?C?LLDCODE0
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2020  16:32:23  PAGE 4
+
+
+  -------         ENDMOD        ?C?LLDCODE0
+
+Program Size: data=21.1 xdata=0 code=1788
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
