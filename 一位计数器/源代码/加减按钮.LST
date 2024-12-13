@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  加减__臺                                                             12/08/2011 10:14:17 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 加减按钮.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 加减按钮.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+0000 7800              2     MAIN:   MOV R0,#00H
+0002 75903F            3                     MOV P1,#3FH
+0005 20A111            4     LOOP:   JB P2.1,NEXT
+0008 120034            5                     LCALL DELAY10ms
+000B 20A10B            6                     JB P2.1,NEXT
+000E 30A1FD            7                     JNB P2.1,$
+0011 08                8                     INC R0
+0012 B80A16            9                     CJNE R0,#10,DISPLAY
+0015 7800             10                     MOV R0,#0
+0017 8012             11                     SJMP DISPLAY
+0019 20A0E9           12     NEXT:   JB P2.0,LOOP
+001C 120034           13                     LCALL DELAY10ms
+001F 20A0E3           14                     JB P2.0,LOOP
+0022 30A0FD           15                     JNB P2.0,$
+0025 18               16                     DEC R0
+0026 B8FF02           17                     CJNE R0,#0FFH,DISPLAY
+0029 7809             18                     MOV R0,#9
+002B 90003D           19     DISPLAY:MOV DPTR,#CC_TAB
+002E E8               20                     MOV A,R0
+002F 93               21                     MOVC A,@A+DPTR
+0030 F590             22                     MOV P1,A
+0032 80D1             23                     SJMP LOOP
+0034                  24     DELAY10ms:
+0034 7E14             25                     MOV R6,#20
+0036 7FFA             26     LOP:    MOV R7,#250
+0038 DFFE             27                     DJNZ R7,$
+003A DEFA             28                     DJNZ R6,LOP
+003C 22               29                     RET
+003D 3F065B4F         30     CC_TAB: DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH,6FH
+0041 666D7D07                
+0045 7F6F                    
+                      31                     END
+A51 MACRO ASSEMBLER  加减__臺                                                             12/08/2011 10:14:17 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CC_TAB . . . . . .  C ADDR   003DH   A   
+DELAY10MS. . . . .  C ADDR   0034H   A   
+DISPLAY. . . . . .  C ADDR   002BH   A   
+LOOP . . . . . . .  C ADDR   0005H   A   
+LOP. . . . . . . .  C ADDR   0036H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+NEXT . . . . . . .  C ADDR   0019H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

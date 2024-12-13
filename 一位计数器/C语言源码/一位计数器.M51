@@ -1,0 +1,140 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        08/19/2014  09:04:13  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE 一位计数器.obj TO 一位计数器
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  一位计数器.obj (一位计数器)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  一位计数器 (一位计数器)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?一位计数器
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0048H     UNIT         ?PR?KEYSCAN?一位计数器
+            CODE    004BH     001EH     UNIT         ?PR?_DELAYMS?一位计数器
+            CODE    0069H     0017H     UNIT         ?PR?DISPLAY?一位计数器
+            CODE    0080H     000DH     UNIT         ?PR?MAIN?一位计数器
+            CODE    008DH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0099H     000AH     UNIT         ?CO?一位计数器
+
+
+
+OVERLAY MAP OF MODULE:   一位计数器 (一位计数器)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?一位计数器
+
+?PR?MAIN?一位计数器
+  +--> ?PR?KEYSCAN?一位计数器
+  +--> ?PR?DISPLAY?一位计数器
+
+?PR?KEYSCAN?一位计数器
+  +--> ?PR?_DELAYMS?一位计数器
+
+?PR?DISPLAY?一位计数器
+  +--> ?CO?一位计数器
+  +--> ?PR?_DELAYMS?一位计数器
+
+
+
+SYMBOL TABLE OF MODULE:  一位计数器 (一位计数器)
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/19/2014  09:04:13  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        一位计数器
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0099H         PUBLIC        table
+  C:004BH         PUBLIC        _DelayMS
+  B:00A0H.0       PUBLIC        KEY1
+  B:00A0H.1       PUBLIC        KEY2
+  C:0080H         PUBLIC        main
+  C:0003H         PUBLIC        KeyScan
+  D:0008H         PUBLIC        num
+  C:0069H         PUBLIC        display
+  -------         PROC          MAIN
+  C:0080H         LINE#         14
+  C:0080H         LINE#         15
+  C:0080H         LINE#         16
+  C:0085H         LINE#         17
+  C:0085H         LINE#         18
+  C:0085H         LINE#         19
+  C:0088H         LINE#         20
+  C:008BH         LINE#         21
+  -------         ENDPROC       MAIN
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        x
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:004BH         LINE#         24
+  C:004BH         LINE#         25
+  C:004BH         LINE#         27
+  C:0055H         LINE#         28
+  C:0055H         LINE#         29
+  C:0068H         LINE#         30
+  C:0068H         LINE#         31
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          KEYSCAN
+  C:0003H         LINE#         33
+  C:0003H         LINE#         34
+  C:0003H         LINE#         35
+  C:0006H         LINE#         36
+  C:0006H         LINE#         37
+  C:000DH         LINE#         38
+  C:0010H         LINE#         39
+  C:0010H         LINE#         40
+  C:0013H         LINE#         41
+  C:001BH         LINE#         42
+  C:002BH         LINE#         43
+  C:002BH         LINE#         44
+  C:002BH         LINE#         46
+  C:002EH         LINE#         47
+  C:002EH         LINE#         48
+  C:0035H         LINE#         49
+  C:0035H         LINE#         50
+  C:0035H         LINE#         51
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/19/2014  09:04:13  PAGE 3
+
+
+  C:0038H         LINE#         52
+  C:0040H         LINE#         53
+  C:004AH         LINE#         54
+  C:004AH         LINE#         55
+  C:004AH         LINE#         56
+  -------         ENDPROC       KEYSCAN
+  -------         PROC          DISPLAY
+  C:0069H         LINE#         58
+  C:0069H         LINE#         59
+  C:0069H         LINE#         60
+  C:0079H         LINE#         61
+  -------         ENDPROC       DISPLAY
+  -------         ENDMOD        一位计数器
+
+Program Size: data=11.0 xdata=0 code=163
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
