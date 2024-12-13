@@ -1,0 +1,19 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+F:\mxa\2015Äê¡¶µ¥Æ¬»úÔ­Àí¼°Ó¦ÓÃ¡·½ÌÑ§¿Î¼ş\µÚ6ÕÂ 51µ¥Æ¬»úµÄ»ù±¾½Ó¿ÚÓ¦ÓÃ¼¼Êõ\ÊµÀı8¡¢´®¿ÚLEDÊıÂë¹Ü¾²Ì¬ÏÔÊ¾\CÔ´Âë - ¸±±¾\´®¿ÚLEDÊıÂë¹Ü¾²Ì¬ÏÔÊ¾.uvproj
+Project File Date:  12/03/2014
+
+<h2>Output:</h2>
+Build target 'Ä¿±ê 1'
+compiling ´®¿ÚLEDÊıÂë¹Ü¾²Ì¬ÏÔÊ¾.c...
+´®¿ÚLEDÊÂë¹Ü¾²Ì¬ÏÔÊ¾.C(2): error C129: missing ';' before 'code'
+Ä¿±êÎ´´´½¨
+Build target 'Ä¿±ê 1'
+compiling ´®¿ÚLEDÊıÂë¹Ü¾²Ì¬ÏÔÊ¾.c...
+linking...
+Program Size: data=9.0 xdata=0 code=59
+creating hex file from "´®¿ÚLEDÊıÂë¹Ü¾²Ì¬ÏÔÊ¾"...
+"´®¿ÚLEDÊıÂë¹Ü¾²Ì¬ÏÔÊ¾" - 0 Error(s), 0 Warning(s).

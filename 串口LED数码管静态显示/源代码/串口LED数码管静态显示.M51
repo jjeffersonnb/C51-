@@ -1,0 +1,48 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/14/2011  11:31:33  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE 串口LED数码管静态显示.obj TO 串口LED数码管静态显示
+
+
+INPUT MODULES INCLUDED:
+  串口LED数码管静态显示.obj (__口LED数码筥綺__蟔示)
+
+
+LINK MAP OF MODULE:  串口LED数码管静态显示 (__口LED数码筥綺__蟔示)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0310H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  串口LED数码管静态显示 (__口LED数码筥綺__蟔示)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        __口LED数码筥綺__蟔示
+  D:00E0H         SYMBOL        ACC
+  C:0200H         SYMBOL        DELAY
+  C:0100H         SYMBOL        DISP
+  C:010AH         SYMBOL        DL0
+  C:0111H         SYMBOL        DL1
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  C:001EH         SYMBOL        LOOP
+  C:0202H         SYMBOL        LOP
+  C:0000H         SYMBOL        MAIN
+  D:0099H         SYMBOL        SBUF
+  C:0300H         SYMBOL        TAB
+  B:0098H.1       SYMBOL        TI
+  -------         ENDMOD        __口LED数码筥綺__蟔示
+
+Program Size: data=8.0 xdata=0 code=784
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

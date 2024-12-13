@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\MXA\我的文档\2020年上学期\《单片机原理及应用》2019省级精品课程材料\2019年《单片机原理及应用》教学课件\第6章 51单片机的基本接口应用技术\实例8、串口LED数码管静态显示\C源码\串口LED数码管静态显示.uvproj
+Project File Date:  12/03/2014
+
+<h2>Output:</h2>
+Build target '目标 1'
+compiling 串口LED数码管静态显示.c...
+linking...
+Program Size: data=9.0 xdata=0 code=83
+creating hex file from "串口LED数码管静态显示"...
+"串口LED数码管静态显示" - 0 Error(s), 0 Warning(s).

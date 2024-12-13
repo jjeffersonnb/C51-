@@ -1,0 +1,94 @@
+A51 MACRO ASSEMBLER  __口LED数码筥綺__蟔示                                                12/14/2011 11:31:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 串口LED数码管静态显示.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 串口LED数码管静态显示.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                                ORG 0000H
+0000 753004            2     MAIN:   MOV 30H,#04H
+0003 753105            3                     MOV 31H,#05H
+0006 753206            4                     MOV 32H,#06H
+0009 753307            5                     MOV 33H,#07H
+000C 753408            6                     MOV 34H,#08H
+000F 753509            7                     MOV 35H,#09H
+0012 753600            8                     MOV 36H,#00H
+0015 753701            9                     MOV 37H,#01H
+0018 753802           10                     MOV 38H,#02H
+001B 753903           11                     MOV 39H,#03H
+001E 3100             12     LOOP:   ACALL DISP
+0020 80FC             13                     SJMP LOOP
+                      14     
+0100                  15                             ORG 0100H
+0100 C0E0             16     DISP:   PUSH ACC
+0102 C083             17                     PUSH DPH
+0104 C082             18                     PUSH DPL
+0106 7A0A             19                     MOV R2,#0AH
+0108 7830             20                     MOV R0,#30H
+010A E6               21     DL0:    MOV A,@R0
+010B 900300           22                     MOV DPTR,#TAB
+010E 93               23                     MOVC A,@A+DPTR
+010F F599             24                     MOV SBUF,A
+0111 3099FD           25     DL1:    JNB TI,DL1
+0114 C299             26                     CLR TI
+0116 5100             27                     ACALL DELAY
+0118 08               28                     INC R0
+0119 DAEF             29                     DJNZ R2,DL0
+011B D082             30                     POP DPL
+011D D083             31                     POP DPH
+011F D0E0             32                     POP ACC
+0121 22               33                     RET
+                      34     
+0200                  35                             ORG 0200H
+0200 7EFA             36     DELAY:  MOV R6,#250
+0202 7FFA             37     LOP:    MOV R7,#250
+0204 7DFA             38                     MOV R5,#250
+0206 7CFA             39                     MOV R4,#250
+0208 00               40                     NOP
+0209 00               41                     NOP
+020A 00               42                     NOP
+020B 00               43                     NOP
+020C DCFE             44                     DJNZ R4,$
+020E DDFE             45                     DJNZ R5,$
+0210 DFFE             46                     DJNZ R7,$
+0212 DEEE             47                     DJNZ R6,LOP
+0214 22               48                     RET
+                      49     
+0300                  50                             ORG 0300H
+0300 C0F9A4B0         51     TAB:    DB 0C0H,0F9H,0A4H,0B0H,99H
+0304 99                      
+0305 9282F880         52                     DB 92H,82H,0F8H,80H,90H
+0309 90                      
+030A 8883C6A1         53                     DB 88H,83H,0C6H,0A1H,86H,83H
+030E 8683                    
+                      54     
+                      55                     END
+A51 MACRO ASSEMBLER  __口LED数码筥綺__蟔示                                                12/14/2011 11:31:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+DELAY. . . . . . .  C ADDR   0200H   A   
+DISP . . . . . . .  C ADDR   0100H   A   
+DL0. . . . . . . .  C ADDR   010AH   A   
+DL1. . . . . . . .  C ADDR   0111H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+LOOP . . . . . . .  C ADDR   001EH   A   
+LOP. . . . . . . .  C ADDR   0202H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+TAB. . . . . . . .  C ADDR   0300H   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
