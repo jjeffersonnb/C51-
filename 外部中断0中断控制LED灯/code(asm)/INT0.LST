@@ -1,0 +1,47 @@
+A51 MACRO ASSEMBLER  INT0                                                                 10/22/2014 21:53:31 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN INT0.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE INT0.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+0000 2100              2                     AJMP MAIN
+                       3     
+0003                   4                     ORG 0003H
+0003 4100              5                     AJMP B_INT0
+                       6     
+0100                   7                     ORG 0100H
+0100 D2AF              8     MAIN:   SETB EA
+0102 D2A8              9                     SETB EX0
+0104 758801           10                     MOV TCON, #01H
+0107 80FE             11                     SJMP $
+                      12                     
+0200                  13                     ORG 0200H
+0200 B280             14     B_INT0: CPL P0.0
+0202 32               15                     RETI
+                      16                     
+                      17                     END     
+                             
+A51 MACRO ASSEMBLER  INT0                                                                 10/22/2014 21:53:31 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B_INT0 . . . . . .  C ADDR   0200H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

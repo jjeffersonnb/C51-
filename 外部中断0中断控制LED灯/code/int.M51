@@ -1,0 +1,87 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/22/2014  21:43:11  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE int.obj TO int RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  int.obj (INT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  int (INT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0012H     000BH     UNIT         ?PR?MAIN?INT
+            CODE    001DH     0003H     UNIT         ?PR?EXTERNAL_INTERRUPT_0?INT
+
+
+
+OVERLAY MAP OF MODULE:   int (INT)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?INT
+
+
+
+SYMBOL TABLE OF MODULE:  int (INT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        INT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:001DH         PUBLIC        External_Interrupt_0
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0012H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/22/2014  21:43:11  PAGE 2
+
+
+  D:0088H         PUBLIC        TCON
+  B:00A8H.0       PUBLIC        EX0
+  B:0080H.0       PUBLIC        LED
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0012H         LINE#         6
+  C:0012H         LINE#         7
+  C:0012H         LINE#         8
+  C:0014H         LINE#         9
+  C:0016H         LINE#         10
+  C:0018H         LINE#         11
+  C:001BH         LINE#         12
+  -------         ENDPROC       MAIN
+  -------         PROC          EXTERNAL_INTERRUPT_0
+  C:001DH         LINE#         15
+  C:001DH         LINE#         17
+  C:001FH         LINE#         18
+  -------         ENDPROC       EXTERNAL_INTERRUPT_0
+  -------         ENDMOD        INT
+
+Program Size: data=9.0 xdata=0 code=32
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

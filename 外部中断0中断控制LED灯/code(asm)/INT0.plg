@@ -1,0 +1,36 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\孝安\Desktop\INT0\code(asm)\INT0.uvproj
+Project File Date:  10/22/2014
+
+<h2>Output:</h2>
+Build target '目标 1'
+assembling INT0.ASM...
+INT0.ASM(5): error A46: CODE-ADDRESS EXPECTED
+INT0.ASM(12): error A8: ATTEMPT TO DEFINE AN ALREADY DEFINED LABEL
+目标未创建
+Build target '目标 1'
+assembling INT0.ASM...
+INT0.ASM(5): error A46: CODE-ADDRESS EXPECTED
+INT0.ASM(12): error A8: ATTEMPT TO DEFINE AN ALREADY DEFINED LABEL
+目标未创建
+Build target '目标 1'
+assembling INT0.ASM...
+INT0.ASM(2): error A51: TARGET OUT OF RANGE
+INT0.ASM(5): error A46: CODE-ADDRESS EXPECTED
+INT0.ASM(13): error A8: ATTEMPT TO DEFINE AN ALREADY DEFINED LABEL
+目标未创建
+Build target '目标 1'
+assembling INT0.ASM...
+INT0.ASM(5): error A46: CODE-ADDRESS EXPECTED
+INT0.ASM(14): error A8: ATTEMPT TO DEFINE AN ALREADY DEFINED LABEL
+目标未创建
+Build target '目标 1'
+assembling INT0.ASM...
+linking...
+Program Size: data=8.0 xdata=0 code=515
+creating hex file from "INT0"...
+"INT0" - 0 Error(s), 0 Warning(s).
