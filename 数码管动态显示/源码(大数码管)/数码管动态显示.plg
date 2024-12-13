@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\LHM\Desktop\《基于CDIO工程教育理念的单片机原理及应用》（2021版）\程序\第11章\11-4 数码管动态显示\源码(大数码管)\数码管动态显示.uvproj
+Project File Date:  12/01/2014
+
+<h2>Output:</h2>
+Build target '目标 1'
+compiling 数码管动态显示.c...
+linking...
+Program Size: data=9.0 xdata=0 code=87
+creating hex file from "数码管动态显示"...
+"数码管动态显示" - 0 Error(s), 0 Warning(s).
