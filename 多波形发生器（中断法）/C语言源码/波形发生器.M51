@@ -1,0 +1,196 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        08/22/2019  16:43:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE 波形发生器.obj TO 波形发生器
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  波形发生器.obj (波形发蒧器)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  波形发生器 (波形发蒧器)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?波形发蒧器
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     0100H     UNIT         ?CO?波形发蒧器
+            CODE    0106H     0033H     UNIT         ?PR?MAIN?波形发蒧器
+            CODE    0139H     0030H     UNIT         ?PR?TIXINGBAO?波形发蒧器
+            CODE    0169H     0023H     UNIT         ?PR?SANJIAOBO?波形发蒧器
+            CODE    018CH     0016H     UNIT         ?PR?_DELAYMS?波形发蒧器
+            CODE    01A2H     0016H     UNIT         ?PR?ZHENGXIANBO?波形发蒧器
+            CODE    01B8H     0015H     UNIT         ?PR?FANGBO?波形发蒧器
+            CODE    01CDH     0013H     UNIT         ?PR?JUCHIBO?波形发蒧器
+            CODE    01E0H     0013H     UNIT         ?PR?INT_EX0?波形发蒧器
+            CODE    01F3H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   波形发生器 (波形发蒧器)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?波形发蒧器
+
+?PR?MAIN?波形发蒧器
+  +--> ?PR?FANGBO?波形发蒧器
+  +--> ?PR?JUCHIBO?波形发蒧器
+  +--> ?PR?SANJIAOBO?波形发蒧器
+  +--> ?PR?TIXINGBAO?波形发蒧器
+  +--> ?PR?ZHENGXIANBO?波形发蒧器
+
+?PR?FANGBO?波形发蒧器
+  +--> ?PR?_DELAYMS?波形发蒧器
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/22/2019  16:43:47  PAGE 2
+
+
+?PR?TIXINGBAO?波形发蒧器
+  +--> ?PR?_DELAYMS?波形发蒧器
+
+?PR?ZHENGXIANBO?波形发蒧器
+  +--> ?CO?波形发蒧器
+
+
+
+SYMBOL TABLE OF MODULE:  波形发生器 (波形发蒧器)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        波形发蒧器
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:01E0H         PUBLIC        INT_EX0
+  C:01A2H         PUBLIC        zhengxianbo
+  C:0106H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0169H         PUBLIC        sanjiaobo
+  C:0139H         PUBLIC        tixingbao
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:00C8H         PUBLIC        T2CON
+  C:01CDH         PUBLIC        juchibo
+  D:0008H         PUBLIC        KeyNo
+  C:0006H         PUBLIC        Table
+  C:01B8H         PUBLIC        fangbo
+  C:018CH         PUBLIC        _delayms
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:018CH         LINE#         39
+  C:018CH         LINE#         40
+  C:018CH         LINE#         42
+  C:0196H         LINE#         43
+  C:01A1H         LINE#         44
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          FANGBO
+  C:01B8H         LINE#         46
+  C:01B8H         LINE#         47
+  C:01B8H         LINE#         48
+  C:01BDH         LINE#         49
+  C:01C3H         LINE#         50
+  C:01C6H         LINE#         51
+  -------         ENDPROC       FANGBO
+  -------         PROC          JUCHIBO
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/22/2019  16:43:47  PAGE 3
+
+
+  D:0007H         SYMBOL        value
+  -------         ENDDO         
+  C:01CDH         LINE#         54
+  C:01CDH         LINE#         55
+  C:01CDH         LINE#         56
+  C:01CFH         LINE#         57
+  C:01D5H         LINE#         58
+  C:01DFH         LINE#         59
+  -------         ENDPROC       JUCHIBO
+  -------         PROC          SANJIAOBO
+  -------         DO            
+  D:0007H         SYMBOL        value
+  -------         ENDDO         
+  C:0169H         LINE#         61
+  C:0169H         LINE#         62
+  C:0169H         LINE#         63
+  C:016BH         LINE#         64
+  C:0171H         LINE#         65
+  C:017BH         LINE#         66
+  C:0181H         LINE#         67
+  C:018BH         LINE#         68
+  -------         ENDPROC       SANJIAOBO
+  -------         PROC          TIXINGBAO
+  -------         DO            
+  D:0004H         SYMBOL        value
+  -------         ENDDO         
+  C:0139H         LINE#         70
+  C:0139H         LINE#         71
+  C:0139H         LINE#         72
+  C:013BH         LINE#         73
+  C:0141H         LINE#         74
+  C:014BH         LINE#         75
+  C:0152H         LINE#         76
+  C:0158H         LINE#         77
+  C:0162H         LINE#         78
+  -------         ENDPROC       TIXINGBAO
+  -------         PROC          ZHENGXIANBO
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:01A2H         LINE#         81
+  C:01A2H         LINE#         82
+  C:01A2H         LINE#         84
+  C:01ABH         LINE#         85
+  C:01B7H         LINE#         86
+  -------         ENDPROC       ZHENGXIANBO
+  -------         PROC          MAIN
+  C:0106H         LINE#         88
+  C:0106H         LINE#         89
+  C:0106H         LINE#         90
+  C:0109H         LINE#         91
+  C:010FH         LINE#         92
+  C:010FH         LINE#         93
+  C:010FH         LINE#         94
+  C:0117H         LINE#         95
+  C:011FH         LINE#         96
+  C:0127H         LINE#         97
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/22/2019  16:43:47  PAGE 4
+
+
+  C:012FH         LINE#         98
+  C:0137H         LINE#         99
+  -------         ENDPROC       MAIN
+  -------         PROC          INT_EX0
+  C:01E0H         LINE#         102
+  C:01E4H         LINE#         104
+  C:01EEH         LINE#         105
+  -------         ENDPROC       INT_EX0
+  -------         ENDMOD        波形发蒧器
+
+Program Size: data=10.0 xdata=0 code=511
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
