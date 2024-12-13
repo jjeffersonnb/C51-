@@ -1,0 +1,210 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/01/2016  16:16:53  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE 正反转可调速电机.obj TO 正反转可调速电机
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  正反转可调速电机.obj (正反转可调速电籣)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  正反转可调速电机 (正反转可调速电籣)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?正反转可调速电籣
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0047H     UNIT         ?PR?TIMER0?正反转可调速电籣
+            CODE    0055H     003AH     UNIT         ?PR?KEY_SCAN?正反转可调速电籣
+            CODE    008FH     0022H     UNIT         ?PR?MAIN?正反转可调速电籣
+            CODE    00B1H     000CH     UNIT         ?C_C51STARTUP
+            CODE    00BDH     000AH     UNIT         ?PR?ZHENGZHUAN?正反转可调速电籣
+            CODE    00C7H     000AH     UNIT         ?PR?FANZHUAN?正反转可调速电籣
+            CODE    00D1H     000AH     UNIT         ?PR?STOP?正反转可调速电籣
+
+
+
+OVERLAY MAP OF MODULE:   正反转可调速电机 (正反转可调速电籣)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?正反转可调速电籣
+
+?PR?MAIN?正反转可调速电籣
+  +--> ?PR?KEY_SCAN?正反转可调速电籣
+
+?PR?KEY_SCAN?正反转可调速电籣
+  +--> ?PR?ZHENGZHUAN?正反转可调速电籣
+  +--> ?PR?FANZHUAN?正反转可调速电籣
+  +--> ?PR?STOP?正反转可调速电籣
+
+
+
+SYMBOL TABLE OF MODULE:  正反转可调速电机 (正反转可调速电籣)
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/01/2016  16:16:53  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        正反转可调速电籣
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00B0H.3       PUBLIC        K4
+  B:00B0H.4       PUBLIC        K5
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  B:0080H.0       PUBLIC        LED1
+  B:0080H.1       PUBLIC        LED2
+  B:0080H.2       PUBLIC        LED3
+  B:0090H.0       PUBLIC        MA
+  D:00A8H         PUBLIC        IE
+  B:0090H.1       PUBLIC        MB
+  C:0055H         PUBLIC        Key_Scan
+  D:0008H         PUBLIC        DS
+  D:00B8H         PUBLIC        IP
+  C:008FH         PUBLIC        main
+  D:0009H         PUBLIC        count
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:00D1H         PUBLIC        stop
+  C:00BDH         PUBLIC        zhengzhuan
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  C:000EH         PUBLIC        timer0
+  B:0088H.4       PUBLIC        TR0
+  C:00C7H         PUBLIC        fanzhuan
+  D:00C8H         PUBLIC        T2CON
+  D:000AH         PUBLIC        SPEED
+  D:00D0H         PUBLIC        PSW
+  B:00B0H.0       PUBLIC        K1
+  B:00B0H.1       PUBLIC        K2
+  B:00B0H.2       PUBLIC        K3
+  -------         PROC          ZHENGZHUAN
+  C:00BDH         LINE#         20
+  C:00BDH         LINE#         21
+  C:00BDH         LINE#         22
+  C:00BFH         LINE#         23
+  C:00C1H         LINE#         24
+  C:00C3H         LINE#         25
+  C:00C6H         LINE#         26
+  -------         ENDPROC       ZHENGZHUAN
+  -------         PROC          FANZHUAN
+  C:00C7H         LINE#         27
+  C:00C7H         LINE#         28
+  C:00C7H         LINE#         29
+  C:00C9H         LINE#         30
+  C:00CBH         LINE#         31
+  C:00CDH         LINE#         32
+  C:00D0H         LINE#         33
+  -------         ENDPROC       FANZHUAN
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/01/2016  16:16:53  PAGE 3
+
+
+  -------         PROC          STOP
+  C:00D1H         LINE#         34
+  C:00D1H         LINE#         35
+  C:00D1H         LINE#         36
+  C:00D3H         LINE#         37
+  C:00D5H         LINE#         38
+  C:00D7H         LINE#         39
+  C:00DAH         LINE#         40
+  -------         ENDPROC       STOP
+  -------         PROC          KEY_SCAN
+  C:0055H         LINE#         42
+  C:0055H         LINE#         43
+  C:0055H         LINE#         44
+  C:0058H         LINE#         45
+  C:0058H         LINE#         46
+  C:005BH         LINE#         47
+  C:005EH         LINE#         48
+  C:005EH         LINE#         49
+  C:0061H         LINE#         50
+  C:0061H         LINE#         51
+  C:0064H         LINE#         52
+  C:0067H         LINE#         53
+  C:0067H         LINE#         54
+  C:006AH         LINE#         55
+  C:006AH         LINE#         56
+  C:006DH         LINE#         57
+  C:0070H         LINE#         58
+  C:0070H         LINE#         59
+  C:0073H         LINE#         60
+  C:0073H         LINE#         61
+  C:0076H         LINE#         62
+  C:007FH         LINE#         63
+  C:007FH         LINE#         64
+  C:0082H         LINE#         65
+  C:0082H         LINE#         66
+  C:0085H         LINE#         67
+  C:008EH         LINE#         68
+  C:008EH         LINE#         70
+  -------         ENDPROC       KEY_SCAN
+  -------         PROC          MAIN
+  C:008FH         LINE#         72
+  C:008FH         LINE#         73
+  C:008FH         LINE#         74
+  C:0091H         LINE#         75
+  C:0093H         LINE#         76
+  C:0095H         LINE#         77
+  C:0098H         LINE#         78
+  C:009BH         LINE#         79
+  C:009DH         LINE#         81
+  C:00A0H         LINE#         82
+  C:00A3H         LINE#         83
+  C:00A6H         LINE#         84
+  C:00A8H         LINE#         85
+  C:00AAH         LINE#         86
+  C:00ACH         LINE#         88
+  C:00ACH         LINE#         89
+  C:00ACH         LINE#         90
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/01/2016  16:16:53  PAGE 4
+
+
+  C:00AFH         LINE#         91
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0
+  C:000EH         LINE#         94
+  C:0012H         LINE#         96
+  C:001EH         LINE#         97
+  C:002AH         LINE#         98
+  C:002AH         LINE#         99
+  C:002CH         LINE#         100
+  C:002EH         LINE#         101
+  C:0030H         LINE#         102
+  C:0032H         LINE#         103
+  C:0039H         LINE#         104
+  C:003DH         LINE#         106
+  C:003FH         LINE#         107
+  C:0041H         LINE#         108
+  C:0043H         LINE#         109
+  C:004AH         LINE#         110
+  C:004EH         LINE#         112
+  C:0050H         LINE#         113
+  C:0050H         LINE#         114
+  -------         ENDPROC       TIMER0
+  -------         ENDMOD        正反转可调速电籣
+
+Program Size: data=12.0 xdata=0 code=211
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

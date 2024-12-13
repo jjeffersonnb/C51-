@@ -1,0 +1,23 @@
+C51 COMPILER V9.00   正反转可调速电籣                                                      12/01/2016 16:16:53 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 正反转可调速电籣
+OBJECT MODULE PLACED IN 正反转可调速电机.OBJ
+COMPILER INVOKED BY: C:\APPS\Keil\C51\BIN\C51.EXE 正反转可调速电机.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    193    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
