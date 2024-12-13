@@ -1,0 +1,167 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/08/2016  17:00:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE 20.obj TO 20 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  20.obj (20)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  20 (20)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     UNIT         ?PR?TIMER0_INT?20
+                    0006H     0005H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0061H     UNIT         ?PR?_DISPLAY_RESULT?20
+            CODE    006FH     0055H     UNIT         ?C?LIB_CODE
+            CODE    00C4H     0025H     UNIT         ?PR?MAIN?20
+            CODE    00E9H     001DH     UNIT         ?PR?_DELAYMS?20
+            CODE    0106H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0112H     000AH     UNIT         ?CO?20
+
+
+
+OVERLAY MAP OF MODULE:   20 (20)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?20
+
+?PR?MAIN?20                    -----    -----
+  +--> ?PR?_DISPLAY_RESULT?20
+
+?PR?_DISPLAY_RESULT?20         0008H    0003H
+  +--> ?CO?20
+  +--> ?PR?_DELAYMS?20
+
+
+
+SYMBOL TABLE OF MODULE:  20 (20)
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/08/2016  17:00:47  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        20
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:0003H         PUBLIC        Timer0_INT
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:00F0H         PUBLIC        _DelayMS
+  B:0080H.7       PUBLIC        DP
+  B:0090H.0       PUBLIC        OE
+  D:00B8H         PUBLIC        IP
+  C:00C4H         PUBLIC        main
+  B:0090H.2       PUBLIC        ST
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:000EH         PUBLIC        _Display_Result
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  C:0112H         PUBLIC        LEDData
+  B:0088H.4       PUBLIC        TR0
+  B:0090H.1       PUBLIC        EOC
+  B:0090H.3       PUBLIC        CLK
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          L?0015
+  -------         ENDPROC       L?0015
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:00F0H         LINE#         16
+  C:00F0H         LINE#         17
+  C:00F0H         LINE#         19
+  C:00FAH         LINE#         20
+  C:00FAH         LINE#         21
+  C:0105H         LINE#         22
+  C:0105H         LINE#         23
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          _DISPLAY_RESULT
+  D:0007H         SYMBOL        d
+  -------         DO            
+  D:0002H         SYMBOL        u
+  D:0008H         SYMBOL        dis
+  -------         ENDDO         
+  C:000EH         LINE#         25
+  C:000EH         LINE#         26
+  C:000EH         LINE#         27
+  C:0021H         LINE#         29
+  C:002AH         LINE#         30
+  C:003EH         LINE#         31
+  C:004BH         LINE#         33
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/08/2016  17:00:47  PAGE 3
+
+
+  C:004EH         LINE#         34
+  C:0053H         LINE#         35
+  C:0056H         LINE#         36
+  C:0059H         LINE#         37
+  C:005BH         LINE#         38
+  C:005EH         LINE#         39
+  C:0061H         LINE#         40
+  C:0066H         LINE#         41
+  C:0068H         LINE#         42
+  -------         ENDPROC       _DISPLAY_RESULT
+  -------         PROC          MAIN
+  C:00C4H         LINE#         45
+  C:00C4H         LINE#         46
+  C:00C4H         LINE#         47
+  C:00C7H         LINE#         48
+  C:00CAH         LINE#         49
+  C:00CDH         LINE#         51
+  C:00D0H         LINE#         52
+  C:00D2H         LINE#         53
+  C:00D5H         LINE#         54
+  C:00D5H         LINE#         55
+  C:00D5H         LINE#         56
+  C:00D7H         LINE#         57
+  C:00D9H         LINE#         58
+  C:00DBH         LINE#         59
+  C:00DEH         LINE#         60
+  C:00E0H         LINE#         61
+  C:00E5H         LINE#         62
+  C:00E7H         LINE#         63
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0_INT
+  C:0003H         LINE#         66
+  C:0003H         LINE#         68
+  C:0005H         LINE#         69
+  -------         ENDPROC       TIMER0_INT
+  -------         ENDMOD        20
+
+  -------         MODULE        ?C?UIDIV
+  C:006FH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=12.0 xdata=0 code=279
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
