@@ -1,0 +1,40 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\LHM\Desktop\《基于CDIO工程教育理念的单片机原理及应用》（2021版）\程序\第3章\3-35 流水灯\CODE\流水灯.uvproj
+Project File Date:  01/22/2021
+
+<h2>Output:</h2>
+Build target '目标 1'
+assembling MAIN.ASM...
+MAIN.ASM(9): error A68: UNKNOWN CONTROL OR BAD ARGUMENT(S)
+MAIN.ASM(16): error A9: SYNTAX ERROR
+目标未创建
+Build target '目标 1'
+assembling MAIN.ASM...
+MAIN.ASM(16): error A9: SYNTAX ERROR
+目标未创建
+Build target '目标 1'
+assembling MAIN.ASM...
+linking...
+Program Size: data=8.0 xdata=0 code=33
+creating hex file from "流水灯"...
+"流水灯" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling MAIN.ASM...
+MAIN.ASM(10): error A22: EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+目标未创建
+Build target '目标 1'
+assembling MAIN.ASM...
+linking...
+Program Size: data=8.0 xdata=0 code=35
+creating hex file from "流水灯"...
+"流水灯" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling MAIN.ASM...
+linking...
+Program Size: data=8.0 xdata=0 code=35
+creating hex file from "流水灯"...
+"流水灯" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 01/22/2021 16:42:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN MAIN.OBJ
+ASSEMBLER INVOKED BY: C:\APPS\Keil\C51\BIN\A51.EXE MAIN.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                 ORG 0000H
+0000 90001B            2                     MOV DPTR, #TABLE
+0003 7800              3     LOOP0:  MOV R0, #00H
+0005 E8                4     LOOP1:  MOV A, R0
+0006 93                5                     MOVC A,@A+DPTR
+0007 F4                6                     CPL A
+0008 F580              7                     MOV P0, A
+000A 1112              8             ACALL DELAY
+000C 08                9                     INC R0
+000D B808F5           10             CJNE R0,#08H,LOOP1
+0010 80F1             11             SJMP LOOP0
+0012 7900             12     DELAY:  MOV R1, #0      
+0014 7A00             13             MOV R2, #0
+0016 D9FE             14     LOOP3:  DJNZ R1, LOOP3
+0018 DAFC             15             DJNZ R2, LOOP3
+001A 22               16             RET
+001B 01020408         17     TABLE:  DB 01H,02H,04H,08H,10H,20H,40H,80H
+001F 10204080                
+                      18             END
+A51 MACRO ASSEMBLER  MAIN                                                                 01/22/2021 16:42:20 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0012H   A   
+LOOP0. . . . . . .  C ADDR   0003H   A   
+LOOP1. . . . . . .  C ADDR   0005H   A   
+LOOP3. . . . . . .  C ADDR   0016H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+TABLE. . . . . . .  C ADDR   001BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

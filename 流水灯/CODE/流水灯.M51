@@ -1,0 +1,56 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/22/2021  16:42:20  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE MAIN.obj TO 流水灯
+
+
+INPUT MODULES INCLUDED:
+  MAIN.obj (MAIN)
+
+
+LINK MAP OF MODULE:  流水灯 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0023H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  流水灯 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0012H         SYMBOL        DELAY
+  C:0003H         SYMBOL        LOOP0
+  C:0005H         SYMBOL        LOOP1
+  C:0016H         SYMBOL        LOOP3
+  D:0080H         SYMBOL        P0
+  C:001BH         SYMBOL        TABLE
+  C:0000H         LINE#         2
+  C:0003H         LINE#         3
+  C:0005H         LINE#         4
+  C:0006H         LINE#         5
+  C:0007H         LINE#         6
+  C:0008H         LINE#         7
+  C:000AH         LINE#         8
+  C:000CH         LINE#         9
+  C:000DH         LINE#         10
+  C:0010H         LINE#         11
+  C:0012H         LINE#         12
+  C:0014H         LINE#         13
+  C:0016H         LINE#         14
+  C:0018H         LINE#         15
+  C:001AH         LINE#         16
+  -------         ENDMOD        MAIN
+
+Program Size: data=8.0 xdata=0 code=35
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
