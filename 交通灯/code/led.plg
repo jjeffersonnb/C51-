@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+G:\《单片机原理及应用》教学课件（2014版）\单片机仿真（2014年版）\实验2 交通灯实验\code\led.uvproj
+Project File Date:  10/20/2014
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: data=11.0 xdata=0 code=286
+creating hex file from "led"...
+"led" - 0 Error(s), 0 Warning(s).
