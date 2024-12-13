@@ -1,0 +1,71 @@
+C51 COMPILER V9.00   MAIN                                                                  02/08/2020 16:18:48 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\APPS\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          unsigned char code tab[]={0xfe,0xfd,0xfb,0xf7,0xef,0xdf,0xbf,0x7f};//列线值
+   3          unsigned char code digittab[10][8]={
+   4          {0x00,0x00,0x3e,0x41,0x41,0x41,0x3e,0x00}, //数字0的行值
+   5          {0x00,0x00,0x00,0x00,0x21,0x7f,0x01,0x00}, //1
+   6          {0x00,0x00,0x27,0x45,0x45,0x45,0x39,0x00}, //2
+   7          {0x00,0x00,0x22,0x49,0x49,0x49,0x36,0x00}, //3
+   8          {0x00,0x00,0x0c,0x14,0x24,0x7f,0x04,0x00}, //4
+   9          {0x00,0x00,0x72,0x51,0x51,0x51,0x4e,0x00}, //5
+  10          {0x00,0x00,0x3e,0x49,0x49,0x49,0x26,0x00}, //6
+  11          {0x00,0x00,0x40,0x40,0x40,0x4f,0x70,0x00}, //7
+  12          {0x00,0x00,0x36,0x49,0x49,0x49,0x36,0x00}, //8
+  13          {0x00,0x00,0x32,0x49,0x49,0x49,0x3e,0x00}               //9
+  14          };
+  15          unsigned int timecount;                                 //定义定时次数变量
+  16          unsigned char lie;                                              //定义列变量
+  17          unsigned char shu;                                              //定义要显示数字的顺序变量
+  18          
+  19          void main(void)
+  20          {
+  21   1              TMOD=0x01;                                                      //定时器0初始化，打开中断，定时3ms 
+  22   1              TH0=(65536-3000)/256;
+  23   1              TL0=(65536-3000)%256;
+  24   1              TR0=1;
+  25   1              ET0=1;
+  26   1              EA=1;
+  27   1              while(1);                                                       //等定时器中断  
+  28   1      }
+  29          
+  30          void t0(void) interrupt 1                               //定时器0中断服务程序
+  31          {
+  32   1              TH0=(65536-3000)/256;           //重装初值
+  33   1              TL0=(65536-3000)%256;
+  34   1              P3=tab[lie];                            //送列值
+  35   1              P0=digittab[shu][lie];          //送行值
+  36   1              lie++;                                          //列值加1
+  37   1              if(lie==8)lie=0;                        //8列扫描完，列值归0 
+  38   1              timecount++;
+  39   1              if(timecount==333)                      //显示时间满1s
+  40   1              {
+  41   2                      timecount=0;                    //定时次数清0 
+  42   2                      shu++;                                  //换下一个数字
+  43   2                      if(shu==10)                             //0～9显示完
+  44   2                              shu=0;                          //再从0开始                     
+  45   2              }
+  46   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    124    ----
+   CONSTANT SIZE    =     88    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V9.00   MAIN                                                                  02/08/2020 16:18:48 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

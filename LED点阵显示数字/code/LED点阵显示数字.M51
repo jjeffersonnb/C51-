@@ -1,0 +1,111 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/08/2020  16:18:48  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE main.obj TO LED点阵显示数字
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  LED点阵显示数字 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?MAIN
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     006BH     UNIT         ?PR?T0?MAIN
+            CODE    0079H     0058H     UNIT         ?CO?MAIN
+            CODE    00D1H     0011H     UNIT         ?PR?MAIN?MAIN
+            CODE    00E2H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   LED点阵显示数字 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?T0?MAIN
+  +--> ?CO?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  LED点阵显示数字 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/08/2020  16:18:48  PAGE 2
+
+
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:000EH         PUBLIC        t0
+  C:00D1H         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  C:0079H         PUBLIC        tab
+  D:0008H         PUBLIC        lie
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  C:0081H         PUBLIC        digittab
+  D:008AH         PUBLIC        TL0
+  D:0009H         PUBLIC        shu
+  B:0088H.4       PUBLIC        TR0
+  D:000AH         PUBLIC        timecount
+  -------         PROC          MAIN
+  C:00D1H         LINE#         19
+  C:00D1H         LINE#         20
+  C:00D1H         LINE#         21
+  C:00D4H         LINE#         22
+  C:00D7H         LINE#         23
+  C:00DAH         LINE#         24
+  C:00DCH         LINE#         25
+  C:00DEH         LINE#         26
+  C:00E0H         LINE#         27
+  -------         ENDPROC       MAIN
+  -------         PROC          T0
+  C:000EH         LINE#         30
+  C:0018H         LINE#         32
+  C:001BH         LINE#         33
+  C:001EH         LINE#         34
+  C:0026H         LINE#         35
+  C:0044H         LINE#         36
+  C:0046H         LINE#         37
+  C:004EH         LINE#         38
+  C:0056H         LINE#         39
+  C:005EH         LINE#         40
+  C:005EH         LINE#         41
+  C:0064H         LINE#         42
+  C:0066H         LINE#         43
+  C:006BH         LINE#         44
+  C:006EH         LINE#         45
+  C:006EH         LINE#         46
+  -------         ENDPROC       T0
+  -------         ENDMOD        MAIN
+
+Program Size: data=13.0 xdata=0 code=230
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
