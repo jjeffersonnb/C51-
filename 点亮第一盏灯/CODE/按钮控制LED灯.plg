@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\单片机系统设计\1.点亮第一盏灯\CODE\按钮控制LED灯.uvproj
+Project File Date:  01/25/2021
+
+<h2>Output:</h2>
+Build target '目标 1'
+compiling main.c...
+linking...
+Program Size: data=9.0 xdata=0 code=27
+creating hex file from "按钮控制LED灯"...
+"按钮控制LED灯" - 0 Error(s), 0 Warning(s).
