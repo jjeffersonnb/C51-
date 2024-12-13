@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\梅孝安\教学\2014年下学期\2014年《单片机原理及应用》教学课件\第6章 51单片机的基本接口应用技术\实例0、IO口扩展\汇编语言源码\IO扩展.uvproj
+Project File Date:  11/18/2014
+
+<h2>Output:</h2>
+Build target '目标 1'
+assembling IO扩展.A...
+linking...
+Program Size: data=8.0 xdata=0 code=263
+creating hex file from "IO扩展"...
+"IO扩展" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,70 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/18/2014  21:45:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE IO扩展.obj TO IO扩展
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  IO扩展.obj (IO扩展)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  IO扩展 (IO扩展)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     000CH     UNIT         ?C_C51STARTUP
+            CODE    000FH     0008H     UNIT         ?PR?MAIN?IO扩展
+
+
+
+OVERLAY MAP OF MODULE:   IO扩展 (IO扩展)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?IO扩展
+
+
+
+SYMBOL TABLE OF MODULE:  IO扩展 (IO扩展)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        IO扩展
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:000FH         PUBLIC        main
+  -------         PROC          MAIN
+  -------         DO            
+  D:0007H         SYMBOL        t
+  -------         ENDDO         
+  C:000FH         LINE#         6
+  C:000FH         LINE#         7
+  C:000FH         LINE#         9
+  C:000FH         LINE#         10
+  C:000FH         LINE#         11
+  C:0014H         LINE#         12
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/18/2014  21:45:14  PAGE 2
+
+
+  C:0015H         LINE#         13
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        IO扩展
+
+Program Size: data=9.0 xdata=0 code=23
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
