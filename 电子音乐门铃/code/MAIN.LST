@@ -1,0 +1,178 @@
+C51 COMPILER V9.00   MAIN                                                                  02/02/2021 11:47:15 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN MAIN.OBJ
+COMPILER INVOKED BY: C:\APPS\Keil\C51\BIN\C51.EXE MAIN.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include <intrins.h>
+   3          
+   4          #define uint unsigned int
+   5          #define uchar unsigned char
+   6          
+   7          sbit K1 = P2^7; //敲门按钮
+   8          sbit SPK = P3^7;
+   9          uchar count;  //敲门次数 访问人次
+  10          int t;  //温度
+  11          uchar sidx;
+  12          
+  13          uchar code HI_LIST[] =
+  14          {
+  15                  0,226,229,232,233,236,238,240,241,242,245,246,247,248
+  16          };
+  17          uchar code LO_LIST[] =
+  18          {
+  19                  0,4,13,10,20,3,8,6,2,23,5,26,1,4,3
+  20          };
+  21          uchar code Song[] =
+  22          {
+  23                  1,2,3,1,1,2,3,1,3,4,5,3,4,5
+  24          };      
+  25          
+  26          void Initialize_LCD();
+  27          void ShowString(uchar x,uchar y,uchar *str);
+  28          void Delayms(uint);
+  29          uint Get_Temperature(); 
+  30          uchar Init_DS18B20();
+  31          
+  32          void t_to_str(int x,uchar *p)    //将温度数据转换为字符串
+  33          {
+  34   1              uchar ws[4];
+  35   1              uint t;
+  36   1              if(x<0)
+  37   1              { p[0]='-'; t=x*(-1); }
+  38   1              else
+  39   1              { p[0]=' '; t=x; }
+  40   1              ws[3]=t/1000;
+  41   1              ws[2]=t%1000/100;
+  42   1              ws[1]=t%100/10;
+  43   1              ws[0]=t%10;
+  44   1      
+  45   1              p[1]=ws[3]+'0';
+  46   1              p[2]=ws[2]+'0';
+  47   1              p[3]=ws[1]+'0';
+  48   1              p[4]='.';
+  49   1              p[5]=ws[0]+'0';
+  50   1              p[6]=0xdf;
+  51   1              p[7]='C';
+  52   1              if(ws[3]==0)p[1]=' ';
+  53   1              if(ws[3]==0 && ws[2]==0)p[2]=' ';
+  54   1      }
+  55          
+C51 COMPILER V9.00   MAIN                                                                  02/02/2021 11:47:15 PAGE 2   
+
+  56          void s_to_str(uchar s, uchar *p) //将速度数据转换为字符串
+  57          {
+  58   1              uchar ws[2];
+  59   1              s=count;  //获取访问人数
+  60   1              ws[0]=s/10;
+  61   1              ws[1]=s%10;
+  62   1              p[0]=' ';
+  63   1              p[1]=ws[0]+'0';
+  64   1              p[2]=ws[1]+'0';
+  65   1              if(ws[0]==0)p[1]=' ';//十位为零则不显示
+  66   1      }
+  67          
+  68          void KeyScan() //按键扫描
+  69          {
+  70   1              uchar i,j;
+  71   1              if(K1 == 0)      //敲门
+  72   1              {
+  73   2                      while(K1 == 0);//等待释放键
+  74   2                      if(count++>99)count=0;
+  75   2                      TR0=1; //启动T0
+  76   2                      for(i=0;i<2;i++)
+  77   2                              for(j=0;j<14;j++)
+  78   2                              {
+  79   3                                      if(TR0==0)break; //如果按了确认键，则提前退出
+  80   3                                      ShowString(0,1,"Someone knocking");
+  81   3                                      sidx=Song[j];
+  82   3                                      Delayms(300);
+  83   3                                      ShowString(0,1,"                ");
+  84   3                              }
+  85   2                      TR0=0; //停止T0
+  86   2                      if(SPK)SPK=0; //确保SPK为低电平，省电 
+  87   2              }
+  88   1      }
+  89          
+  90          void T_Scan() //温度扫描函数
+  91          {
+  92   1              t=Get_Temperature();
+  93   1              if(t==0)t=Get_Temperature();
+  94   1              if(t==0)t=Get_Temperature();
+  95   1      
+  96   1      }
+  97          
+  98          void Display() //LCD1602显示函数
+  99          {
+ 100   1              uchar str1[16]="Tempure:";
+ 101   1              uchar str2[16]="Vistors:";
+ 102   1              t_to_str(t,str1+8);
+ 103   1              ShowString(0,0,str1);   
+ 104   1              s_to_str(count,str2+8); 
+ 105   1              ShowString(0,1,str2);   
+ 106   1      }       
+ 107          
+ 108          void main(void)
+ 109          {
+ 110   1              SPK=0;
+ 111   1              IE=0x82;  //开EA和ET0
+ 112   1              TMOD=0x00; //T0工作在方式0      
+ 113   1              EX0=1; //开外部中断0
+ 114   1              IT0=1; //跳变触发方式
+ 115   1              TR0=0; //停止T0
+ 116   1      
+ 117   1              count = 0;
+C51 COMPILER V9.00   MAIN                                                                  02/02/2021 11:47:15 PAGE 3   
+
+ 118   1              Initialize_LCD();
+ 119   1               
+ 120   1              ShowString(0,0,"System Starting ");
+ 121   1              ShowString(0,1,"Please wait.    ");
+ 122   1              Init_DS18B20();
+ 123   1              t=Get_Temperature();
+ 124   1              t=Get_Temperature();
+ 125   1              Delayms(3000); 
+ 126   1      
+ 127   1              while(1)
+ 128   1              {
+ 129   2                      KeyScan(); //扫描按键
+ 130   2                      T_Scan();  //扫描温度
+ 131   2                      Display(); //显示
+ 132   2                      Delayms(100);
+ 133   2              }
+ 134   1      }
+ 135          
+ 136          
+ 137          void T0_INT() interrupt 1
+ 138          {
+ 139   1              SPK=!SPK;
+ 140   1              TH0=HI_LIST[sidx];
+ 141   1              TL0=LO_LIST[sidx];
+ 142   1      }
+ 143          
+ 144          void EX0_INT() interrupt 0
+ 145          {
+ 146   1              if(TR0)TR0=0; //停止T0，停止放音乐
+ 147   1              if(count)count=0; //访问次数清零
+ 148   1      }
+ 149          
+ 150          
+ 151          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    652    ----
+   CONSTANT SIZE    =    143    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4      47
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
