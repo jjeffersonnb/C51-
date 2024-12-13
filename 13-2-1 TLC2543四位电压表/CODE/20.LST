@@ -1,0 +1,103 @@
+C51 COMPILER V9.00   20                                                                    03/04/2020 16:14:11 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 20
+OBJECT MODULE PLACED IN 20.OBJ
+COMPILER INVOKED BY: C:\APPS\Keil\C51\BIN\C51.EXE 20.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          sbit CS=P3^5;
+   4          sbit CLK=P3^6;
+   5          sbit DIN=P3^4;
+   6          sbit DOUT=P3^3;
+   7          sbit DP  = P0^7;
+   8          unsigned char code LEDData[]=
+   9          {
+  10                  0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f
+  11          };
+  12          unsigned int tmp;
+  13          unsigned int vot; //定义函数，输入参数为命令字，输出为转换结果
+  14          void Display_Result(unsigned int d);
+  15          
+  16          void DelayMS(unsigned int ms)
+  17          {
+  18   1              unsigned char i;
+  19   1              while(ms--)
+  20   1              {
+  21   2                      for(i=0;i<120;i++);
+  22   2              }
+  23   1      }
+  24          
+  25          unsigned int TLC2543(unsigned char command)
+  26          {
+  27   1              unsigned char i;
+  28   1              unsigned int result=0;
+  29   1              CS=1;                                                   
+  30   1              CLK=0;
+  31   1              CS=0;                                                   //片选有效
+  32   1              for(i=0;i<12;i++)
+  33   1              {
+  34   2                      DOUT=1;                                 //P3.3为输入口
+  35   2                      result<<=1;                                     //result数据左移一位
+  36   2                      result|=DOUT;                           //DOUT线上的数据写到result的最低位上
+  37   2                      DIN=command&(0x80>>i);  //将命令字按位送出
+  38   2                      CLK=1;          
+  39   2                      nop_();                                         //高电平保持一定宽度
+  40   2                      nop_();
+  41   2                      CLK=0;                                  
+  42   2              }
+  43   1              return  result;                                 //返回转换结果
+  44   1      }
+  45          
+  46          void main()
+  47          {       
+  48   1              while(1)
+  49   1              {               
+  50   2                      tmp=TLC2543(0x30);              //启动TLC2543转换，通道3，12位数据输出
+  51   2                      vot=(int)tmp*(float)5000/4096;  //结果换算为对应的电压值
+  52   2                      Display_Result(vot);
+  53   2              }
+  54   1      }
+  55          
+C51 COMPILER V9.00   20                                                                    03/04/2020 16:14:11 PAGE 2   
+
+  56          void Display_Result(unsigned int d)
+  57          {
+  58   1              unsigned char dis[4];
+  59   1              dis[0]=d/1000;    //千位
+  60   1              dis[1]=d/100%10;  //百位
+  61   1              dis[2]=(d%100)/10; //十位
+  62   1              dis[3]=d%10;  //个位
+  63   1      
+  64   1              P2 = 0xf7; //右边第一位   1111 0111
+  65   1              P0 = LEDData[dis[3]];
+  66   1              DelayMS(3);
+  67   1              P2 = 0xfb; //第二位               1111 1011
+  68   1              P0 = LEDData[dis[2]];
+  69   1              DelayMS(3);
+  70   1              P2 = 0xfd; //第三位               1111 1101
+  71   1              P0 = LEDData[dis[1]] ;
+  72   1              DelayMS(3);
+  73   1              P2 = 0xfe; //第三位               1111 1110
+  74   1              P0 = LEDData[dis[0]] ;
+  75   1              DP=1;      //小数点点亮
+  76   1              DelayMS(3);
+  77   1      }
+  78          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    271    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
