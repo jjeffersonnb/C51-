@@ -1,0 +1,38 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/26/2018  17:17:34  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE 硬件译码数码管显示.obj TO 硬件译码数码管显示
+
+
+INPUT MODULES INCLUDED:
+  硬件译码数码管显示.obj (觃件译码数码筥蟔示)
+
+
+LINK MAP OF MODULE:  硬件译码数码管显示 (觃件译码数码筥蟔示)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0008H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  硬件译码数码管显示 (觃件译码数码筥蟔示)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        觃件译码数码筥蟔示
+  C:0000H         SYMBOL        MAIN
+  D:0080H         SYMBOL        P0
+  D:00A0H         SYMBOL        P2
+  -------         ENDMOD        觃件译码数码筥蟔示
+
+Program Size: data=8.0 xdata=0 code=8
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

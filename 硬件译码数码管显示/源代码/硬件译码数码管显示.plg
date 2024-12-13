@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+E:\mxa\2018年《单片机原理及应用》教学课件\第6章 51单片机的基本接口应用技术\实例9、硬件译码数码管显示\源代码\硬件译码数码管显示.uvproj
+Project File Date:  12/13/2011
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling 硬件译码数码管显示.ASM...
+linking...
+Program Size: data=8.0 xdata=0 code=8
+creating hex file from "硬件译码数码管显示"...
+"硬件译码数码管显示" - 0 Error(s), 0 Warning(s).

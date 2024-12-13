@@ -1,0 +1,31 @@
+A51 MACRO ASSEMBLER  觃件译码数码筥蟔示                                                   11/26/2018 17:17:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 硬件译码数码管显示.OBJ
+ASSEMBLER INVOKED BY: C:\APPS\Keil\C51\BIN\A51.EXE 硬件译码数码管显示.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+0000 758012            2     MAIN:   MOV P0,#12H
+0003 75A034            3                     MOV P2,#34H
+0006 80FE              4                     SJMP $
+                       5                     END
+A51 MACRO ASSEMBLER  觃件译码数码筥蟔示                                                   11/26/2018 17:17:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN . . . . . . .  C ADDR   0000H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

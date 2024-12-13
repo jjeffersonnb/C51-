@@ -1,0 +1,5 @@
+		ORG 0000H
+MAIN:	MOV P0,#12H
+		MOV P2,#34H
+		SJMP $
+		END
