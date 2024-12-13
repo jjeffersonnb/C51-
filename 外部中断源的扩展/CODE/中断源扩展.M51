@@ -1,0 +1,91 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/25/2021  17:00:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\APPS\KEIL\C51\BIN\BL51.EXE main.obj TO 中断源扩展
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\APPS\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  中断源扩展 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     0018H     UNIT         ?PR?INT0_SERVER?MAIN
+            CODE    001EH     000CH     UNIT         ?C_C51STARTUP
+            CODE    002AH     000BH     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   中断源扩展 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  中断源扩展 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0090H.4       PUBLIC        INT_3
+  B:0090H.6       PUBLIC        INT_4
+  D:0090H         PUBLIC        P1
+  B:00A8H.7       PUBLIC        EA
+  B:0090H.1       PUBLIC        LED1
+  B:0090H.3       PUBLIC        LED2
+  B:0090H.5       PUBLIC        LED3
+  B:0090H.7       PUBLIC        LED4
+  C:002AH         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/25/2021  17:00:27  PAGE 2
+
+
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  C:0006H         PUBLIC        int0_server
+  B:0090H.0       PUBLIC        INT_1
+  B:0090H.2       PUBLIC        INT_2
+  -------         PROC          MAIN
+  C:002AH         LINE#         10
+  C:002AH         LINE#         11
+  C:002AH         LINE#         12
+  C:002DH         LINE#         13
+  C:002FH         LINE#         14
+  C:0031H         LINE#         15
+  C:0033H         LINE#         16
+  -------         ENDPROC       MAIN
+  -------         PROC          INT0_SERVER
+  C:0006H         LINE#         18
+  C:0006H         LINE#         20
+  C:0009H         LINE#         21
+  C:000EH         LINE#         22
+  C:0013H         LINE#         23
+  C:0018H         LINE#         24
+  C:001DH         LINE#         25
+  -------         ENDPROC       INT0_SERVER
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=53
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
